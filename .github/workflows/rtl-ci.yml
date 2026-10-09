@@ -1,0 +1,40 @@
+name: RTL lint + sim
+
+# Corre lint (Verilator) y simulación (Icarus) del ejemplo guía en cada
+# push o PR que toque el RTL o el flujo de verificación funcional.
+on:
+  push:
+    paths:
+      - 'common/rtl/**'
+      - 'flows/opensource/**'
+      - '.github/workflows/rtl-ci.yml'
+  pull_request:
+    paths:
+      - 'common/rtl/**'
+      - 'flows/opensource/**'
+
+jobs:
+  rtl:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar Icarus Verilog y Verilator
+        run: sudo apt-get update && sudo apt-get install -y iverilog verilator
+
+      # Lint informativo: reporta estilo/ancho pero NO bloquea el PR.
+      - name: Lint (Verilator, informativo)
+        run: |
+          verilator --lint-only -Wall --top-module top_minypld \
+            common/rtl/semaphore/rtl/top_minypld.v \
+            common/rtl/semaphore/rtl/clk_divider.v \
+            common/rtl/semaphore/rtl/semaphore.v || true
+
+      # Este es el filtro real: la simulación debe imprimir ">>> PASS".
+      - name: Simular testbench (Icarus)
+        run: |
+          iverilog -g2012 -o sim_sem \
+            common/rtl/semaphore/rtl/semaphore.v \
+            common/rtl/semaphore/tb/tb_semaphore.v
+          vvp sim_sem | tee sim.log
+          grep -q ">>> PASS" sim.log   # falla el CI si no imprime PASS

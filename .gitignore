@@ -1,0 +1,65 @@
+# ===== Simulación (open source) =====
+*.vcd
+*.fst
+*.out
+*.vvp
+sim
+sim_*
+a.out
+
+# ===== Verilator =====
+obj_dir/
+
+# ===== Synopsys / Siemens (NO subir salidas ni logs con datos licenciados) =====
+*.daidir/
+csrc/
+simv
+simv.daidir/
+ucli.key
+*.vpd
+*.fsdb
+novas.*
+verdiLog/
+DVEfiles/
+work/
+transcript
+*.wlf
+vsim.wlf
+modelsim.ini
+*.vstf
+
+# ===== Reportes y netlists generados =====
+*.rpt
+*.log
+*.sdf
+*.spef
+*_mapped.v
+*_synth.v
+
+# ===== Quartus (MinyPLD) =====
+db/
+incremental_db/
+output_files/
+*.qws
+*.rpt
+*.pof
+*.sof
+*.jdi
+*.pin
+*.summary
+*.smsg
+*.done
+
+# ===== PDKs / librerías con licencia — NUNCA subir =====
+*.lib
+*.db
+*.lef
+*.gds
+pdk/
+PDK/
+
+# ===== Varios =====
+__pycache__/
+.DS_Store
+*.swp
+.vscode/
