@@ -1,3 +1,4 @@
+`timescale 1ns / 1ps
 // =====================================================================
 //  semaphore.v  ·  Ejemplo guía "Galletas y Postres: el camino de chips"
 //  Cápsula 2 (Churros / RTL). Este MISMO archivo alimenta los dos flujos:

@@ -1,3 +1,4 @@
+`timescale 1ns / 1ps
 // =====================================================================
 //  top_minypld.v  ·  Top de la demo para la MinyPLD (Altera/Intel MAX V)
 //  Conecta el divisor de reloj + el semáforo a los pines de la tarjeta.

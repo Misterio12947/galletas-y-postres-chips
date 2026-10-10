@@ -1,3 +1,4 @@
+`timescale 1ns / 1ps
 // =====================================================================
 //  clk_divider.v  ·  Divisor de reloj para que los LEDs se vean en la tarjeta
 //  Solo se usa en la implementación física (MinyPLD). En simulación NO
