@@ -1,0 +1,15 @@
+[options]
+mode bmc
+depth 20
+
+[engines]
+smtbmc
+
+[script]
+read -formal formal_top.v
+read -formal semaphore.v
+prep -top formal_top
+
+[files]
+formal_top.v
+../../../common/rtl/semaphore/rtl/semaphore.v
