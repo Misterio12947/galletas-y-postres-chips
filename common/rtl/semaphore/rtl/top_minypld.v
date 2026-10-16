@@ -24,7 +24,7 @@ module top_minypld (
     );
 
     // El semáforo corriendo a ritmo humano.
-    semaphore #(.T_GREEN(5), .T_YELLOW(2), .T_RED(5), .CW(8)) u_sem (
+    semaforo #(.T_GREEN(5), .T_YELLOW(2), .T_RED(5), .CW(8)) u_sem (
         .clk   (slow_clk),
         .rst_n (rst_n),
         .red   (led_red),

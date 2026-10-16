@@ -9,7 +9,7 @@
 //  Semáforo de 3 estados (verde -> amarillo -> rojo -> verde) tipo Moore.
 //  RTL puro y sintetizable: describe el QUÉ, no el CÓMO.
 // =====================================================================
-module semaphore #(
+module semaforo #(
     parameter integer T_GREEN  = 5,   // ticks en verde
     parameter integer T_YELLOW = 2,   // ticks en amarillo
     parameter integer T_RED    = 5,   // ticks en rojo

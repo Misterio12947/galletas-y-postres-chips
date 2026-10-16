@@ -14,7 +14,7 @@ module tb_semaphore;
     wire red, yellow, green;
 
     // Tiempos chicos para simular rápido (en el tablero son más largos).
-    semaphore #(.T_GREEN(3), .T_YELLOW(2), .T_RED(3), .CW(8)) dut (
+    semaforo #(.T_GREEN(3), .T_YELLOW(2), .T_RED(3), .CW(8)) dut (
         .clk(clk), .rst_n(rst_n),
         .red(red), .yellow(yellow), .green(green)
     );
