@@ -1,65 +1,46 @@
-# ===== Simulación (open source) =====
-*.vcd
-*.fst
-*.out
-*.vvp
-sim
-sim_*
-a.out
+# =====================================================================
+#  .gitignore - Galletas y Postres: el camino de disenar chips
+#  Artefactos de simulacion / sintesis / layout que NO se versionan.
+#  (Si alguna vez quieres versionar un ejemplo concreto: git add -f <archivo>)
+# =====================================================================
 
-# ===== Verilator =====
-obj_dir/
+# ---- Logs genericos de herramientas ----
+*.log
 
-# ===== Synopsys / Siemens (NO subir salidas ni logs con datos licenciados) =====
-*.daidir/
-csrc/
+# ---- Yosys / open source ----
+netlist.v
+*.blif
+
+# ---- Synopsys VCS (simulacion) ----
 simv
 simv.daidir/
+csrc/
 ucli.key
 *.vpd
-*.fsdb
+*.vcd
+AN.DB/
+DVEfiles/
+vc_hdrs.h
+.vcs_lib_lock
+
+# ---- Synopsys Design Compiler / Library Compiler ----
+*.svf
+alib-*/
+WORK/
+work/
+flows/synopsys/06-sintesis/lib/*.db
+flows/synopsys/06-sintesis/reports/
+flows/synopsys/06-sintesis/netlist.v
+
+# ---- Verdi ----
 novas.*
 verdiLog/
-DVEfiles/
-work/
-transcript
-*.wlf
-vsim.wlf
-modelsim.ini
-*.vstf
+nWaveLog/
 
-# ===== Reportes y netlists generados =====
-*.rpt
-*.log
-*.sdf
-*.spef
-*_mapped.v
-*_synth.v
+# ---- SymbiYosys (verif. formal) ----
+flows/opensource/04-verif-formal/prueba/
+flows/opensource/04-verif-formal/bug/
 
-# ===== Quartus (MinyPLD) =====
-db/
-incremental_db/
-output_files/
-*.qws
-*.rpt
-*.pof
-*.sof
-*.jdi
-*.pin
-*.summary
-*.smsg
-*.done
-
-# ===== PDKs / librerías con licencia — NUNCA subir =====
-*.lib
-*.db
-*.lef
-*.gds
-pdk/
-PDK/
-
-# ===== Varios =====
-__pycache__/
+# ---- Sistema ----
 .DS_Store
-*.swp
-.vscode/
+*~

@@ -18,7 +18,7 @@ prueba:
 	sby -f prueba.sby
 
 bug:
-	sby -f bug.sby
+	sby -f bug.sby || echo ">>> FAIL esperado: el checker formal cazo el bug (ver bug/engine_0/trace.vcd)"
 
 wave:
 	gtkwave bug/engine_0/trace.vcd &
