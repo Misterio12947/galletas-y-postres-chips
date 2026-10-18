@@ -25,7 +25,12 @@ vc_hdrs.h
 
 # ---- Synopsys Design Compiler / Library Compiler ----
 *.svf
+*.mr
+*.pvl
+*.syn
 alib-*/
+cksum_dir/
+lc_output.txt
 WORK/
 work/
 flows/synopsys/06-sintesis/lib/*.db
