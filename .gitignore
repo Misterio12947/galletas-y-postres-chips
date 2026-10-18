@@ -28,6 +28,14 @@ DVEfiles/
 vc_hdrs.h
 .vcs_lib_lock
 
+# ---- Synopsys IC Compiler II (PnR) ----
+*.dlib/
+icc2_output.txt
+icc2_command.log
+legalizer_debug_plots/
+flows/synopsys/07-pnr/results/
+flows/synopsys/07-pnr/reports/
+
 # ---- Synopsys Design Compiler / Library Compiler ----
 *.svf
 *.mr
