@@ -11,6 +11,11 @@
 netlist.v
 *.blif
 
+# ---- OpenROAD (PnR) ----
+flows/opensource/07-pnr/results/
+route_drc.rpt
+*.odb
+
 # ---- Synopsys VCS (simulacion) ----
 simv
 simv.daidir/
@@ -25,7 +30,12 @@ vc_hdrs.h
 
 # ---- Synopsys Design Compiler / Library Compiler ----
 *.svf
+*.mr
+*.pvl
+*.syn
 alib-*/
+cksum_dir/
+lc_output.txt
 WORK/
 work/
 flows/synopsys/06-sintesis/lib/*.db
