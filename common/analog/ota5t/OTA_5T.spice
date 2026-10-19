@@ -1,0 +1,12 @@
+** sch_path: common/analog/ota5t/OTA_5T.sch
+.subckt OTA_5T VIN VOUT_AMP VINN VINP IB VSS
+*.PININFO VIN:B VSS:B VOUT_AMP:B IB:B VINN:B VINP:B
+XM1 IB IB VSS VSS sky130_fd_pr__nfet_01v8 L=1 W=2.5 nf=1 m=4
+XM2 tail IB VSS VSS sky130_fd_pr__nfet_01v8 L=1 W=2.5 nf=1 m=4
+XM3 net1 VINP tail VSS sky130_fd_pr__nfet_01v8 L=1 W=3 nf=1 m=4
+XM4 VOUT_AMP VINN tail VSS sky130_fd_pr__nfet_01v8 L=1 W=3 nf=1 m=4
+XM5 VOUT_AMP net1 VIN VIN sky130_fd_pr__pfet_01v8 L=1 W=6 nf=1 m=4
+XM6 net1 net1 VIN VIN sky130_fd_pr__pfet_01v8 L=1 W=6 nf=1 m=4
+XM8 tail VSS tail VSS sky130_fd_pr__nfet_01v8 L=0.15 W=3 nf=1 m=4
+XM7 VIN VIN VIN VIN sky130_fd_pr__pfet_01v8 L=0.15 W=6 nf=1 m=4
+.ends

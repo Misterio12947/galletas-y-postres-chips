@@ -62,3 +62,6 @@ flows/opensource/04-verif-formal/bug/
 # ---- Sistema ----
 .DS_Store
 *~
+# ---- xschem (esquematico / netlist) ----
+flows/opensource/09-esquematico/results/
+xschem.log
