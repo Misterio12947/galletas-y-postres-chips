@@ -17,9 +17,11 @@ link_design  $TOP
 read_sdc     semaforo.sdc
 
 # ---- Implementacion minima para tener parasitos del ruteo -----------
-#  (el signoff se hace con los cables reales; aqui los conseguimos con un
-#   place + CTS + global route rapido, como en Tres Leches)
-file mkdir results
+#  El signoff se hace con los cables reales; aqui los estimamos con un
+#  place + CTS + global route rapido (como en Tres Leches). Son parasitos
+#  EN MEMORIA, suficientes para el analisis. Un SPEF "de firma" requiere
+#  extraccion OpenRCX (detailed route + extract_parasitics); del lado
+#  comercial, ese SPEF ya lo genero ICC2 en Tres Leches.
 initialize_floorplan -utilization 40 -aspect_ratio 1.0 -core_space 3.0 -site unithd
 make_tracks
 place_pins -hor_layers met3 -ver_layers met2
@@ -29,9 +31,6 @@ clock_tree_synthesis -buf_list sky130_fd_sc_hd__clkbuf_4 -root_buf sky130_fd_sc_
 set_propagated_clock [all_clocks]
 global_route
 estimate_parasitics -global_routing
-
-# ---- El SPEF que "firmamos" -----------------------------------------
-catch { write_spef results/semaforo.spef }
 
 # =====================================================================
 #  STA: el veredicto

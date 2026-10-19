@@ -19,8 +19,8 @@ cd flows/opensource/08-sta
 ```
 
 Hace: sintetiza el netlist (Yosys), implementa un place + CTS + global route
-rapido para tener parasitos reales, escribe el **SPEF** (`results/semaforo.spef`)
-y corre el STA (`report_checks` de setup y hold) -> todo a `sta.log`.
+rapido para tener parasitos (en memoria) y corre el STA (`report_checks` de
+setup y hold) -> todo a `sta.log`.
 
 ## Que mostrar en vivo
 
@@ -49,10 +49,12 @@ es el mismo: **netlist + SDC + SPEF -> veredicto de timing**.
 
 ## Notas
 
-- El SPEF (`results/`), `sta.log` y `netlist.v` estan en el `.gitignore`.
-- `estimate_parasitics -global_routing` da los parasitos desde el ruteo global;
-  para signoff fino se usaria el ruteo detallado + extraccion, pero para la
-  demo el orden de magnitud y el veredicto son los correctos.
+- `sta.log` y `netlist.v` estan en el `.gitignore`.
+- `estimate_parasitics -global_routing` da parasitos **en memoria** desde el
+  ruteo global: suficientes para el veredicto. Un **SPEF de firma** requiere
+  extraccion OpenRCX (detailed route + `extract_parasitics` con las reglas RCX
+  del PDK); por eso aqui no se escribe SPEF. Del lado comercial, ese SPEF lo
+  genera ICC2 (Tres Leches) y PrimeTime lo lee directo.
 
 ## Callback / relevo
 

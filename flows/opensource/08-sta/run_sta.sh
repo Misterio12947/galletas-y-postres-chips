@@ -31,4 +31,4 @@ fi
 echo ">> Corriendo STA (OpenSTA)..."
 openroad -exit sta.tcl 2>&1 | tee sta.log
 
-echo ">> Listo.  Reporte completo en sta.log  |  SPEF en results/semaforo.spef"
+echo ">> Listo.  Reporte completo en sta.log"
