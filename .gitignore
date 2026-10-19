@@ -67,3 +67,7 @@ flows/opensource/04-verif-formal/bug/
 # ---- xschem (esquematico / netlist) ----
 flows/opensource/09-esquematico/results/
 xschem.log
+
+# ---- ngspice (simulacion analogica) ----
+flows/opensource/10-simulacion/results/
+*.raw

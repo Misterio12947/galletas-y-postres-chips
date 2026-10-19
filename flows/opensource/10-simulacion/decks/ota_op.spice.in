@@ -1,0 +1,37 @@
+* Arroz con Leche - OTA 5T - punto de operacion (.op)   [corner: __CORNER__]
+* Plantilla: run_sim.sh rellena __SKY130_LIB__, __OTA__ y __CORNER__.
+.lib "__SKY130_LIB__" __CORNER__
+.include "__OTA__"
+
+* --- Testbench: bias VDD=1.8 V, entradas a 0.9 V (mid-rail), IB=12 uA ---
+Vdd   VDD  0     1.8
+Vinp  VINP 0     0.9
+Vinn  VINN 0     0.9
+Ibias VDD  IB    12u
+Cl    VOUT 0     1p
+* OTA_5T: VIN VOUT_AMP VINN VINP IB VSS  (orden posicional del .subckt)
+x1    VDD VOUT VINN VINP IB 0  OTA_5T
+
+* Guardar parametros de operacion de los 4 transistores del core
+.save @m.x1.xm3.msky130_fd_pr__nfet_01v8[id] @m.x1.xm3.msky130_fd_pr__nfet_01v8[gm] @m.x1.xm3.msky130_fd_pr__nfet_01v8[vds] @m.x1.xm3.msky130_fd_pr__nfet_01v8[vdsat]
+.save @m.x1.xm4.msky130_fd_pr__nfet_01v8[id] @m.x1.xm4.msky130_fd_pr__nfet_01v8[gm] @m.x1.xm4.msky130_fd_pr__nfet_01v8[vds] @m.x1.xm4.msky130_fd_pr__nfet_01v8[vdsat]
+.save @m.x1.xm5.msky130_fd_pr__pfet_01v8[id] @m.x1.xm5.msky130_fd_pr__pfet_01v8[gm] @m.x1.xm5.msky130_fd_pr__pfet_01v8[vds] @m.x1.xm5.msky130_fd_pr__pfet_01v8[vdsat]
+.save @m.x1.xm6.msky130_fd_pr__pfet_01v8[id] @m.x1.xm6.msky130_fd_pr__pfet_01v8[gm] @m.x1.xm6.msky130_fd_pr__pfet_01v8[vds] @m.x1.xm6.msky130_fd_pr__pfet_01v8[vdsat]
+
+.control
+op
+echo " "
+echo "===== Punto de operacion  (corner __CORNER__) ====="
+echo "Regla: en saturacion |vds| > |vdsat|  ->  hay ganancia"
+echo " "
+echo "--- Par diferencial (NMOS) : M3 debe ~= M4 (matching) ---"
+print @m.x1.xm3.msky130_fd_pr__nfet_01v8[id] @m.x1.xm3.msky130_fd_pr__nfet_01v8[gm] @m.x1.xm3.msky130_fd_pr__nfet_01v8[vds] @m.x1.xm3.msky130_fd_pr__nfet_01v8[vdsat]
+print @m.x1.xm4.msky130_fd_pr__nfet_01v8[id] @m.x1.xm4.msky130_fd_pr__nfet_01v8[gm] @m.x1.xm4.msky130_fd_pr__nfet_01v8[vds] @m.x1.xm4.msky130_fd_pr__nfet_01v8[vdsat]
+echo "--- Espejo de carga (PMOS) : M5 debe ~= M6 (matching) ---"
+print @m.x1.xm5.msky130_fd_pr__pfet_01v8[id] @m.x1.xm5.msky130_fd_pr__pfet_01v8[gm] @m.x1.xm5.msky130_fd_pr__pfet_01v8[vds] @m.x1.xm5.msky130_fd_pr__pfet_01v8[vdsat]
+print @m.x1.xm6.msky130_fd_pr__pfet_01v8[id] @m.x1.xm6.msky130_fd_pr__pfet_01v8[gm] @m.x1.xm6.msky130_fd_pr__pfet_01v8[vds] @m.x1.xm6.msky130_fd_pr__pfet_01v8[vdsat]
+echo "--- Salida en reposo ---"
+print v(VOUT)
+echo " "
+.endc
+.end

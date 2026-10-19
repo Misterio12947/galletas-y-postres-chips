@@ -1,0 +1,27 @@
+* Arroz con Leche - OTA 5T - respuesta en frecuencia (.ac)   [corner: __CORNER__]
+* Plantilla: run_sim.sh rellena __SKY130_LIB__, __OTA__, __CORNER__ y __OUT__.
+.lib "__SKY130_LIB__" __CORNER__
+.include "__OTA__"
+
+* --- Testbench: estimulo diferencial +-0.5 AC alrededor de 0.9 V, carga 1 pF ---
+Vdd   VDD  0     1.8
+Vinp  VINP 0     dc 0.9 ac  0.5
+Vinn  VINN 0     dc 0.9 ac -0.5
+Ibias VDD  IB    12.56u
+Cl    VOUT 0     1p
+* OTA_5T: VIN VOUT_AMP VINN VINP IB VSS  (orden posicional del .subckt)
+x1    VDD VOUT VINN VINP IB 0  OTA_5T
+
+.control
+ac dec 100 1 1G
+let gain_db = db(v(vout))
+let ph_deg  = 180/pi*ph(v(vout))
+* volcar el Bode a texto para graficarlo / notebook
+wrdata __OUT__/bode.txt gain_db ph_deg
+echo " "
+echo "===== Respuesta en frecuencia lista (corner __CORNER__) ====="
+echo "Bode -> __OUT__/bode.txt   (col0=freq, col1=gain_dB, col3=fase_deg)"
+echo "Grafica y metricas (Av0, GBW, margen de fase): plot_bode.py"
+echo " "
+.endc
+.end
