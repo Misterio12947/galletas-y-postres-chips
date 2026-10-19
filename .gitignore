@@ -75,3 +75,8 @@ flows/opensource/10-simulacion/results/
 # ---- KLayout / Magic (layout: DRC / LVS / PEX) ----
 flows/opensource/11-layout/results/
 *.lyrdb
+
+flows/opensource/12-pex/results/
+*.ext
+*.sim
+*.nodes
