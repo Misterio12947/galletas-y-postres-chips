@@ -11,8 +11,9 @@
 netlist.v
 *.blif
 
-# ---- OpenROAD (PnR) ----
+# ---- OpenROAD (PnR / STA) ----
 flows/opensource/07-pnr/results/
+flows/opensource/08-sta/results/
 route_drc.rpt
 *.odb
 
@@ -35,6 +36,7 @@ icc2_command.log
 legalizer_debug_plots/
 flows/synopsys/07-pnr/results/
 flows/synopsys/07-pnr/reports/
+flows/synopsys/08-sta/reports/
 
 # ---- Synopsys Design Compiler / Library Compiler ----
 *.svf
