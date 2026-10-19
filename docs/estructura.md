@@ -1,31 +1,44 @@
 # Estructura del repositorio
 
 ```
-common/rtl/<bloque>/          Código fuente compartido (RTL + testbench)
+common/rtl/<bloque>/          Fuentes digitales compartidas (RTL + testbench)
+common/analog/<bloque>/       Fuentes analogicas compartidas (esquematico, simbolo,
+                              netlist SPICE, GDS) -- p.ej. common/analog/ota5t/
 flows/<flujo>/<NN-etapa>/     Scripts por herramienta que consumen common/
+flows/<flujo>/notebooks/      Notebooks interactivos (Colab) por etapa
 presentadores/<nombre>/       Material de cada expositor
-docs/                         Convenciones, estructura, guía MinyPLD
+docs/                         Convenciones, estructura, guia MinyPLD
 ```
 
 ## Flujos
 
-| Carpeta | Herramientas típicas |
+| Carpeta | Herramientas tipicas |
 |---|---|
-| `flows/opensource/` | Yosys, Icarus, Verilator, OpenROAD, Magic, Netgen, ngspice, SymbiYosys |
-| `flows/synopsys/` | VCS, Design Compiler, PrimeTime, IC Validator, StarRC, PrimeSim |
+| `flows/opensource/` | Yosys, Icarus, Verilator, OpenROAD, Magic, KLayout, Netgen, ngspice, xschem, SymbiYosys |
+| `flows/synopsys/` | VCS, Design Compiler, PrimeTime, IC Compiler II, IC Validator, StarRC, PrimeSim |
 | `flows/siemens/` | Questa, Oasys, Nitro, Calibre |
 | `flows/fpga-minypld/` | Quartus (MAX V) |
 
-## Etapas (igual que las cápsulas)
+## Etapas (igual que las capsulas)
 
-`01-pdk` · `02-rtl` · `03-verif-funcional` · `04-verif-formal` · `05-fpga`
-· `06-sintesis` · `07-pnr` · `08-sta-signoff` · `09-12-analog`
+**Riel digital** (RTL -> GDS firmado):
+`02-rtl` · `03-verif-funcional` · `04-verif-formal` · `06-sintesis` ·
+`07-pnr` · `08-sta`
 
-**Empezamos por `02-rtl`.** Las demás carpetas se van llenando conforme cada
-expositor sube su demo.
+**Riel analogico** (esquematico -> silicio verificado):
+`09-esquematico` · `10-simulacion` · `11-layout` · `12-pex`
+
+(La FPGA va aparte, en `flows/fpga-minypld/`.)
 
 ## Regla de oro
 
-El **mismo** RTL/testbench se escribe una vez en `common/` y lo reusan todos
-los flujos. Si te ves copiando RTL a una carpeta de flujo, deténte: va en
-`common/` y el flujo solo lo referencia.
+El **mismo** diseno se escribe una vez en `common/` y lo reusan todos los
+flujos y etapas:
+
+- **Digital:** el RTL/testbench vive en `common/rtl/<bloque>/`.
+- **Analogico:** el esquematico/simbolo/netlist/GDS viven en
+  `common/analog/<bloque>/` (p.ej. el OTA de 5T en `common/analog/ota5t/`, que
+  reusan las 4 capsulas analogicas: esquematico -> sim -> layout -> PEX).
+
+Si te ves copiando un diseno a una carpeta de flujo, detente: va en `common/`
+y el flujo solo lo referencia.
