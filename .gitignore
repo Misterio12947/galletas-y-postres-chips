@@ -71,3 +71,7 @@ xschem.log
 # ---- ngspice (simulacion analogica) ----
 flows/opensource/10-simulacion/results/
 *.raw
+
+# ---- KLayout / Magic (layout: DRC / LVS / PEX) ----
+flows/opensource/11-layout/results/
+*.lyrdb
