@@ -1,35 +1,33 @@
 # =====================================================================
 #  semaphore.qsf  ·  Proyecto Quartus para la MinyPLD (Altera/Intel MAX V)
-#  Cápsula 5 (Mazapán / FPGA-CPLD).
-#
-#  ⚠️ PLACEHOLDERS: el OPN exacto del dispositivo y TODOS los pines de abajo
-#  dependen de TU tarjeta MinyPLD. Ajústalos al pinout real antes de compilar.
-#  (Pon el part number que trae tu 5M80Z y las ubicaciones reales de pines.)
+#  Capsula 5 (Mazapan / FPGA-CPLD).
+#  Pinout real de la tarjeta MinyPLD de Cesar (5M80ZE64C5).
 # =====================================================================
 
 set_global_assignment -name FAMILY "MAX V"
-# TODO: cambia al OPN exacto de tu MinyPLD (ej. 5M80ZE64C5 / 5M80ZT100C5 ...)
 set_global_assignment -name DEVICE 5M80ZE64C5
-
 set_global_assignment -name TOP_LEVEL_ENTITY top_minypld
 
-# ---- Fuentes (el mismo RTL compartido) ------------------------------
+# ---- Fuentes (el mismo RTL compartido en common/) -------------------
 set_global_assignment -name VERILOG_FILE ../../../common/rtl/semaphore/rtl/top_minypld.v
 set_global_assignment -name VERILOG_FILE ../../../common/rtl/semaphore/rtl/clk_divider.v
 set_global_assignment -name VERILOG_FILE ../../../common/rtl/semaphore/rtl/semaphore.v
 set_global_assignment -name SDC_FILE semaphore.sdc
 
-# ---- Asignación de pines (PLACEHOLDER — ajusta a tu tarjeta) ---------
-# TODO: reemplaza PIN_XX por las ubicaciones reales de la MinyPLD.
-set_location_assignment PIN_XX -to clk
-set_location_assignment PIN_XX -to rst_n
-set_location_assignment PIN_XX -to led_red
-set_location_assignment PIN_XX -to led_yellow
-set_location_assignment PIN_XX -to led_green
+# ---- Asignacion de pines (REAL, MinyPLD 5M80ZE64C5) -----------------
+set_location_assignment PIN_7  -to clk
+set_location_assignment PIN_21 -to rst_n
+set_location_assignment PIN_62 -to led_red
+set_location_assignment PIN_63 -to led_yellow
+set_location_assignment PIN_64 -to led_green
 
-# ---- Estándar de E/S (ajusta según el banco de tu tarjeta) ----------
+# ---- Estandar de E/S ------------------------------------------------
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to clk
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to rst_n
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to led_red
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to led_yellow
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to led_green
+
+# ---- Seguridad: pines no usados como entrada tri-estado -------------
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
+set_global_assignment -name USE_CONFIGURATION_DEVICE ON

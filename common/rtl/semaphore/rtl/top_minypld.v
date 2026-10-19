@@ -1,4 +1,3 @@
-`timescale 1ns / 1ps
 // =====================================================================
 //  top_minypld.v  ·  Top de la demo para la MinyPLD (Altera/Intel MAX V)
 //  Conecta el divisor de reloj + el semáforo a los pines de la tarjeta.
@@ -16,15 +15,15 @@ module top_minypld (
 );
     wire slow_clk;
 
-    // Divisor para pasar del reloj de la tarjeta a ~1 Hz visible.
-    clk_divider #(.DIV(25_000_000), .CW(25)) u_div (
+    // DIV = medio periodo en ciclos: 0.5 s * 25 MHz = 12.5M  -> slow_clk = 1 Hz.
+    clk_divider #(.DIV(12_500_000), .CW(24)) u_div (
         .clk_in (clk),
         .rst_n  (rst_n),
         .clk_out(slow_clk)
     );
 
     // El semáforo corriendo a ritmo humano.
-    semaforo #(.T_GREEN(5), .T_YELLOW(2), .T_RED(5), .CW(8)) u_sem (
+    semaphore #(.T_GREEN(5), .T_YELLOW(2), .T_RED(5), .CW(8)) u_sem (
         .clk   (slow_clk),
         .rst_n (rst_n),
         .red   (led_red),
